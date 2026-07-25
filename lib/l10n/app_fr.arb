@@ -1,4 +1,25 @@
 {
   "@@locale": "fr",
-  "appTitle": "Piano"
+  "appTitle": "Piano",
+  "octavePrevious": "Octave inférieure",
+  "octaveNext": "Octave supérieure",
+  "toggleNoteLabels": "Étiquettes",
+  "toggleSustain": "Sustain",
+  "toggleLargeKeys": "Grandes touches",
+  "keySemantics": "{note} {octave}, touche de piano",
+  "audioErrorTitle": "Son indisponible",
+  "audioErrorBody": "Le moteur sonore du piano n'a pas pu démarrer. Fermez les autres applications audio puis réessayez.",
+  "audioErrorRetry": "Réessayer",
+  "noteC": "do",
+  "noteCSharp": "do dièse",
+  "noteD": "ré",
+  "noteDSharp": "ré dièse",
+  "noteE": "mi",
+  "noteF": "fa",
+  "noteFSharp": "fa dièse",
+  "noteG": "sol",
+  "noteGSharp": "sol dièse",
+  "noteA": "la",
+  "noteASharp": "la dièse",
+  "noteB": "si"
 }
