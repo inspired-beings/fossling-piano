@@ -12,7 +12,7 @@ readonly APK="${1:-build/app/outputs/flutter-apk/app-release.apk}"
 # Set from this app's measured baseline (universal release APK) + ~15% headroom at the
 # first release, then only lower it. The template ships no number on purpose — an
 # inherited budget is a silent pass, not a baseline.
-readonly MAX_MIB=SET_ME
+readonly MAX_MIB=61
 # Old-device reach: a higher floor drops users off the app.
 readonly MAX_MIN_SDK=26
 # No networking, no background work, no boot hooks. Remove a network entry ONLY when

@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:piano/screens/audio_failure_screen.dart';
 import 'package:piano/screens/boot_screen.dart';
+import 'package:piano/screens/piano_screen.dart';
 
+import '../helpers/fake_audio_engine.dart';
+import '../helpers/fake_key_haptics.dart';
 import '../helpers/pump_localized.dart';
+
+Future<void> _pumpPianoScreen(WidgetTester tester, Locale locale) =>
+    pumpLocalized(
+      tester,
+      PianoScreen(engine: FakeAudioEngine(), haptics: FakeKeyHaptics()),
+      locale: locale,
+    );
 
 /// Every state the user can land on, in every shipped locale, must pass the Material
 /// accessibility guidelines. A new screen that is not registered here is the failure
@@ -10,6 +21,24 @@ import '../helpers/pump_localized.dart';
 final _screenStates = <String, Future<void> Function(WidgetTester, Locale)>{
   'boot screen': (tester, locale) =>
       pumpLocalized(tester, const BootScreen(), locale: locale),
+  'piano (labels on)': _pumpPianoScreen,
+  'piano (labels off)': (tester, locale) async {
+    await _pumpPianoScreen(tester, locale);
+    await tester.tap(find.byIcon(Icons.abc));
+    await tester.pumpAndSettle();
+  },
+  'piano (large keys)': (tester, locale) async {
+    await _pumpPianoScreen(tester, locale);
+    await tester.tap(find.byIcon(Icons.zoom_in));
+    await tester.pumpAndSettle();
+  },
+  'piano (sustain on)': (tester, locale) async {
+    await _pumpPianoScreen(tester, locale);
+    await tester.tap(find.byIcon(Icons.all_inclusive));
+    await tester.pumpAndSettle();
+  },
+  'audio failure': (tester, locale) =>
+      pumpLocalized(tester, AudioFailureScreen(onRetry: () {}), locale: locale),
 };
 
 void main() {
