@@ -18,7 +18,7 @@ Aucun accès réseau, aucune autorisation, aucune publicité, aucune mesure d'au
 🌍 DANS VOTRE LANGUE
 Affichez le nom des notes sur les touches — do ré mi en français, C D E en anglais — ou masquez-les quand vous préférez simplement jouer. L'application est disponible en français et en anglais.
 
-Le son du piano provient du jeu d'échantillons Salamander Grand Piano d'Alexander Holm, utilisé sous licence Creative Commons Attribution 3.0.
+Le son du piano provient du jeu d'échantillons Salamander Grand Piano d'Alexander Holm (https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html), utilisé sous licence Creative Commons Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/). Les échantillons ont été raccourcis, dotés d'un fondu de sortie et compressés en Ogg Vorbis pour cette application.
 
 Fossling Piano est un logiciel libre (AGPL-3.0), membre de Fossling — la collection d'applications libres et sans publicité d'Inspired Beings.
 

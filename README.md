@@ -28,7 +28,7 @@ No ads, no tracking, no analytics — ever. No network access, no permissions: n
 
 Show the note names on the keys — C D E in English, do ré mi in French — or hide them when you would rather just play. Available in English and French.
 
-The piano sound comes from the [Salamander Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html) sample set by Alexander Holm, used under the [Creative Commons Attribution 3.0](https://creativecommons.org/licenses/by/3.0/) license — see [NOTICE](./NOTICE).
+The piano sound comes from the [Salamander Grand Piano](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html) sample set by Alexander Holm, used under the [Creative Commons Attribution 3.0](https://creativecommons.org/licenses/by/3.0/) license — the samples were trimmed, faded out and compressed to Ogg Vorbis for this app (see [NOTICE](./NOTICE)).
 
 Fossling Piano is free software (AGPL-3.0), part of [Fossling](https://github.com/inspired-beings) — the Inspired Beings collection of free/libre, adless apps.
 
