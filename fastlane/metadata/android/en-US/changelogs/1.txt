@@ -1,0 +1,10 @@
+First release.
+
+- 88 keys, A0 to C8, with octave navigation
+- Multi-touch chords and glissando
+- Recorded grand piano sound, with a sustain toggle
+- Note names on the keys (C D E or do ré mi), hidden on demand
+- Large-key mode, high contrast, per-key haptics with a distinct pulse on C
+- Full TalkBack support: every key announced, plays on double-tap
+- English and French
+- No network access, no permissions, no ads, no analytics
