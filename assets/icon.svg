@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title2">Fossling Piano Icon</title>
+  <g
+     id="layer1">
+    <rect
+       style="display:inline;fill:#0c1a4b;fill-opacity:1;stroke:none;stroke-linecap:round;stroke-miterlimit:2"
+       id="rect1"
+       width="48"
+       height="48"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     id="layer3">
+    <rect
+       id="keyboard-frame"
+       x="10"
+       y="13"
+       width="28"
+       height="22"
+       rx="2.5"
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="3"
+       stroke-linecap="round"
+       stroke-miterlimit="2" />
+    <path
+       id="key-dividers"
+       d="M 17,14 V 34 M 24,14 V 34 M 31,14 V 34"
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="2" />
+    <path
+       id="black-keys"
+       d="M 14.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z M 21.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z"
+       fill="#ffffff"
+       stroke="none" />
+  </g>
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Inspired Beings EURL</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:date>2026-07-26</dc:date>
+        <dc:title>Fossling Piano Icon</dc:title>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>© Inspired Beings EURL. Licensed under CC BY-SA 4.0.</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Ivan Gabriele</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
