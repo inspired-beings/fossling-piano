@@ -6,7 +6,7 @@ class PointerTracker {
   final Map<int, int?> _pointerNotes = {};
 
   Set<int> get activeMidis =>
-      {for (final midi in _pointerNotes.values) if (midi != null) midi};
+      {for (final midi in _pointerNotes.values) ?midi};
 
   NoteTransition down(int pointerId, int? midi) {
     _pointerNotes[pointerId] = midi;

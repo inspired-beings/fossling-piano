@@ -1,4 +1,31 @@
 {
   "@@locale": "en",
-  "appTitle": "Piano"
+  "appTitle": "Piano",
+  "octavePrevious": "Octave down",
+  "octaveNext": "Octave up",
+  "toggleNoteLabels": "Labels",
+  "toggleSustain": "Sustain",
+  "toggleLargeKeys": "Large keys",
+  "keySemantics": "{note} {octave}, piano key",
+  "@keySemantics": {
+    "placeholders": {
+      "note": {"type": "String"},
+      "octave": {"type": "int"}
+    }
+  },
+  "audioErrorTitle": "Sound unavailable",
+  "audioErrorBody": "The piano sound engine could not start. Close other audio apps and retry.",
+  "audioErrorRetry": "Retry",
+  "noteC": "C",
+  "noteCSharp": "C sharp",
+  "noteD": "D",
+  "noteDSharp": "D sharp",
+  "noteE": "E",
+  "noteF": "F",
+  "noteFSharp": "F sharp",
+  "noteG": "G",
+  "noteGSharp": "G sharp",
+  "noteA": "A",
+  "noteASharp": "A sharp",
+  "noteB": "B"
 }
