@@ -56,6 +56,17 @@ void main() {
     expect(layout.hitTest(const Offset(50, 401)), isNull);
   });
 
+  test('black keys never drop below the 48dp target floor', () {
+    final layout = KeyboardLayout(
+      firstWhiteIndex: 19,
+      whiteKeyCount: 11,
+      size: const Size(800, 400), // whiteWidth 72.7 → 0.6 ratio would give 43.6
+    );
+    for (final key in layout.blackKeys) {
+      expect(key.rect.width, greaterThanOrEqualTo(48.0));
+    }
+  });
+
   test('clampFirstWhiteIndex keeps viewport inside A0..C8', () {
     expect(clampFirstWhiteIndex(-3, 11), 0);
     expect(clampFirstWhiteIndex(45, 11), 41);

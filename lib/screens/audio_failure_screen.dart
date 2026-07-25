@@ -12,7 +12,7 @@ class AudioFailureScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisSize: MainAxisSize.min,

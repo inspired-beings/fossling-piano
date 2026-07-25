@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui';
 
 import '../../libs/note_mapper.dart';
@@ -40,7 +41,8 @@ class KeyboardLayout {
           isBlack: false,
         ),
     ]);
-    final blackWidth = whiteWidth * 0.6;
+    // A11y floor: ≥48dp targets, but a black key never outgrows a white one.
+    final blackWidth = math.max(whiteWidth * 0.6, math.min(48.0, whiteWidth));
     final blackHeight = size.height * 0.62;
     blackKeys = List.unmodifiable([
       for (var i = -1; i < whiteKeyCount; i++)

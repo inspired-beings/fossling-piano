@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../features/controls/components/control_bar.dart';
@@ -32,7 +34,12 @@ class _PianoScreenState extends State<PianoScreen> {
   bool _sustainOn = false;
   bool _largeKeysOn = false;
 
-  int get _whiteKeyCount => _largeKeysOn ? kLargeWhiteKeyCount : kNormalWhiteKeyCount;
+  /// Caps the viewport so every white key keeps a ≥48dp target on any width.
+  int _whiteKeyCountFor(double width) {
+    final maxKeys = math.max(3, width ~/ 48);
+    final wanted = _largeKeysOn ? kLargeWhiteKeyCount : kNormalWhiteKeyCount;
+    return math.min(wanted, maxKeys);
+  }
 
   Future<void> _startNote(int pointerId, int midi) async {
     widget.haptics.onKeyPress(midi);
@@ -69,10 +76,10 @@ class _PianoScreenState extends State<PianoScreen> {
     await widget.engine.release(voice, sustain: _sustainOn);
   }
 
-  void _shiftOctave(int deltaWhites) {
+  void _shiftOctave(int deltaWhites, int whiteKeyCount) {
     setState(() {
       _firstWhiteIndex =
-          clampFirstWhiteIndex(_firstWhiteIndex + deltaWhites, _whiteKeyCount);
+          clampFirstWhiteIndex(_firstWhiteIndex + deltaWhites, whiteKeyCount);
     });
   }
 
@@ -80,38 +87,40 @@ class _PianoScreenState extends State<PianoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            ControlBar(
-              canGoOctaveDown: _firstWhiteIndex > 0,
-              canGoOctaveUp: _firstWhiteIndex < kWhiteKeyTotal - _whiteKeyCount,
-              onOctaveDown: () => _shiftOctave(-7),
-              onOctaveUp: () => _shiftOctave(7),
-              labelsOn: _labelsOn,
-              onLabelsToggle: () => setState(() => _labelsOn = !_labelsOn),
-              sustainOn: _sustainOn,
-              onSustainToggle: () => setState(() => _sustainOn = !_sustainOn),
-              largeKeysOn: _largeKeysOn,
-              onLargeKeysToggle: () => setState(() {
-                _largeKeysOn = !_largeKeysOn;
-                _firstWhiteIndex =
-                    clampFirstWhiteIndex(_firstWhiteIndex, _whiteKeyCount);
-              }),
-            ),
-            Expanded(
-              child: PianoKeyboard(
-                firstWhiteIndex: _firstWhiteIndex,
-                whiteKeyCount: _whiteKeyCount,
-                showLabels: _labelsOn,
-                pressedMidis: _tracker.activeMidis,
-                onKeyDown: _onKeyDown,
-                onKeyMove: _onKeyMove,
-                onKeyUp: _onKeyUp,
-                onKeyTap: _onKeyTap,
+        child: LayoutBuilder(builder: (context, constraints) {
+          final whiteKeyCount = _whiteKeyCountFor(constraints.maxWidth);
+          return Column(
+            children: [
+              ControlBar(
+                canGoOctaveDown: _firstWhiteIndex > 0,
+                canGoOctaveUp: _firstWhiteIndex < kWhiteKeyTotal - whiteKeyCount,
+                onOctaveDown: () => _shiftOctave(-7, whiteKeyCount),
+                onOctaveUp: () => _shiftOctave(7, whiteKeyCount),
+                labelsOn: _labelsOn,
+                onLabelsToggle: () => setState(() => _labelsOn = !_labelsOn),
+                sustainOn: _sustainOn,
+                onSustainToggle: () => setState(() => _sustainOn = !_sustainOn),
+                largeKeysOn: _largeKeysOn,
+                onLargeKeysToggle: () => setState(() {
+                  _largeKeysOn = !_largeKeysOn;
+                }),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                child: PianoKeyboard(
+                  firstWhiteIndex:
+                      clampFirstWhiteIndex(_firstWhiteIndex, whiteKeyCount),
+                  whiteKeyCount: whiteKeyCount,
+                  showLabels: _labelsOn,
+                  pressedMidis: _tracker.activeMidis,
+                  onKeyDown: _onKeyDown,
+                  onKeyMove: _onKeyMove,
+                  onKeyUp: _onKeyUp,
+                  onKeyTap: _onKeyTap,
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
