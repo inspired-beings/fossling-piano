@@ -1,22 +1,27 @@
-<Hook line.> Fossling <Function> <what it does — one paragraph, primary audience named>.
+Play freely, share nothing. Fossling Piano turns your phone into a responsive piano keyboard with the sound of a real grand — for trying a chord, checking a pitch, or simply playing, and built so that blind and low-vision players are not left out.
 
-<EMOJI> <ALL-CAPS BENEFIT PHRASE>
-<1–3 benefit-led sentences weaving in concrete features.>
+🎹 THE WHOLE KEYBOARD
+All 88 keys are there. The octave buttons move you across the full A0 to C8 range, and the view adapts to your screen width so every key stays big enough to hit.
 
-<EMOJI> <ALL-CAPS BENEFIT PHRASE>
-<1–3 sentences.>
+🎵 THE SOUND OF A REAL PIANO
+Each note comes from a recorded grand piano, not a synthesizer beep. Turn sustain on to let notes ring, off for a clean release.
 
-<EMOJI> <ALL-CAPS BENEFIT PHRASE>
-<1–3 sentences.>
+🎶 CHORDS AND GLISSANDOS
+Press several keys at once for a chord, or slide a finger across the keyboard for a glissando. Every finger is tracked on its own.
+
+♿ ACCESSIBILITY FIRST, ALWAYS
+Every key is announced by TalkBack and plays on double-tap. A haptic pulse confirms each press, with a distinct one on every C so you can feel where you are. Large-key mode, high contrast, and your system font size honored.
 
 🔒 PRIVATE BY DESIGN
-No ads, no tracking, no analytics — ever. <Network truth for this app: either "No network access." or full transparency — what travels, where it goes, and the self-hostable/self-manageable option.>
+No network access, no permissions, no ads, no analytics. Nothing is recorded and nothing leaves your phone.
 
 🌍 IN YOUR LANGUAGE
-Available in English and French.
+Show the note names on the keys — C D E in English, do ré mi in French — or hide them when you would rather just play. The app is available in English and French.
 
-Fossling <Function> is free software (AGPL-3.0), part of Fossling — the Inspired Beings collection of free/libre, adless apps.
+The piano sound comes from the Salamander Grand Piano sample set by Alexander Holm, used under the Creative Commons Attribution 3.0 license.
+
+Fossling Piano is free software (AGPL-3.0), part of Fossling — the Inspired Beings collection of free/libre, adless apps.
 
 More Fossling apps: https://github.com/inspired-beings
 Website: https://www.inspired-beings.com
-Source code: https://github.com/inspired-beings/fossling-<app>
+Source code: https://github.com/inspired-beings/fossling-piano

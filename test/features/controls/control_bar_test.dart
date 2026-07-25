@@ -30,8 +30,8 @@ void main() {
     await pumpLocalized(tester, bar(), locale: const Locale('fr'));
     expect(find.bySemanticsLabel('Octave inférieure'), findsOneWidget);
     expect(find.bySemanticsLabel('Octave supérieure'), findsOneWidget);
-    expect(find.text('Étiquettes'), findsOneWidget);
-    expect(find.text('Sustain'), findsOneWidget);
+    expect(find.text('Noms des notes'), findsOneWidget);
+    expect(find.text('Résonance'), findsOneWidget);
     expect(find.text('Grandes touches'), findsOneWidget);
   });
 
@@ -56,7 +56,7 @@ void main() {
         onLargeKeysToggle: () => large++,
       ),
     );
-    await tester.tap(find.text('Labels'));
+    await tester.tap(find.text('Note names'));
     await tester.tap(find.text('Sustain'));
     await tester.tap(find.text('Large keys'));
     expect((labels, sustain, large), (1, 1, 1));

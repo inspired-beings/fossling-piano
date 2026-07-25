@@ -91,6 +91,14 @@ void main() {
     expect(buttons.first.onPressed, isNull);
   });
 
+  testWidgets('octave shift announces the new range for screen readers',
+      (tester) async {
+    await pumpScreen(tester);
+    await tester.tap(find.bySemanticsLabel('Octave down'));
+    await tester.pump();
+    expect(tester.takeAnnouncements().single.message, 'Keys F2 to B3');
+  });
+
   testWidgets('large-key mode shows 7 white keys', (tester) async {
     await pumpScreen(tester);
     await tester.tap(find.text('Large keys'));

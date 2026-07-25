@@ -3,7 +3,7 @@
   "appTitle": "Piano",
   "octavePrevious": "Octave down",
   "octaveNext": "Octave up",
-  "toggleNoteLabels": "Labels",
+  "toggleNoteLabels": "Note names",
   "toggleSustain": "Sustain",
   "toggleLargeKeys": "Large keys",
   "keySemantics": "{note} {octave}, piano key",
@@ -14,7 +14,14 @@
     }
   },
   "audioErrorTitle": "Sound unavailable",
-  "audioErrorBody": "The piano sound engine could not start. Close other audio apps and retry.",
+  "audioErrorBody": "Fossling Piano could not start its sound. Close any other app that is playing audio, then try again.",
+  "octaveRangeAnnouncement": "Keys {from} to {to}",
+  "@octaveRangeAnnouncement": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
   "audioErrorRetry": "Retry",
   "noteC": "C",
   "noteCSharp": "C sharp",

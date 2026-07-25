@@ -1,0 +1,10 @@
+Première version.
+
+- 88 touches, du la0 au do8, navigation par octave
+- Accords multi-touch et glissando
+- Son de piano à queue enregistré et résonance
+- Nom des notes sur les touches (do ré mi ou C D E), masquable
+- Mode grandes touches, contrastes élevés, vibration par touche avec pulsation distincte sur les do
+- TalkBack : chaque touche annoncée, jouée par double appui
+- Français et anglais
+- Aucun accès réseau, aucune autorisation, aucune publicité, aucune mesure d'audience

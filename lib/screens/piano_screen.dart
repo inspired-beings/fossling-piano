@@ -1,8 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import '../features/controls/components/control_bar.dart';
+import '../l10n/generated/app_localizations.dart';
+import '../libs/note_names.dart';
 import '../features/keyboard/components/piano_keyboard.dart';
 import '../features/keyboard/constants.dart';
 import '../features/keyboard/key_haptics.dart';
@@ -81,6 +84,16 @@ class _PianoScreenState extends State<PianoScreen> {
       _firstWhiteIndex =
           shiftedFirstWhiteIndex(_firstWhiteIndex, direction, whiteKeyCount);
     });
+    // Octave moves are silent, so TalkBack users need the new range spoken.
+    final l10n = AppLocalizations.of(context);
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      l10n.octaveRangeAnnouncement(
+        visualNoteLabel(l10n, whiteMidis[_firstWhiteIndex]),
+        visualNoteLabel(l10n, whiteMidis[_firstWhiteIndex + whiteKeyCount - 1]),
+      ),
+      Directionality.of(context),
+    );
   }
 
   @override
