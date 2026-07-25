@@ -1,0 +1,9 @@
+Fossling Piano
+Copyright (C) 2026 Ivan Gabriele / Inspired Beings
+
+Piano sound samples are derived from "Salamander Grand Piano V3"
+by Alexander Holm, licensed under Creative Commons Attribution 3.0
+(CC BY 3.0, https://creativecommons.org/licenses/by/3.0/).
+Source: https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html
+Modifications: trimming, fade-out, Ogg Vorbis compression
+(see tool/prepare_samples.sh and assets/samples/PROVENANCE.md).
