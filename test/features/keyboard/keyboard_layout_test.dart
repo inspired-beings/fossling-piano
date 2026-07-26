@@ -67,6 +67,20 @@ void main() {
     }
   });
 
+  test('octave shifts snap back to the home grid after an end clamp', () {
+    // Down from the default F3 view: F2, F1, then clamped to A0.
+    expect(shiftedFirstWhiteIndex(19, -1, 11), 12);
+    expect(shiftedFirstWhiteIndex(12, -1, 11), 5);
+    expect(shiftedFirstWhiteIndex(5, -1, 11), 0);
+    // Back up: rejoins the F-anchored grid instead of staying A-anchored.
+    expect(shiftedFirstWhiteIndex(0, 1, 11), 5);
+    expect(shiftedFirstWhiteIndex(5, 1, 11), 12);
+    // Top end: 40 is on-grid, 41 is the clamp for an 11-key viewport.
+    expect(shiftedFirstWhiteIndex(40, 1, 11), 41);
+    expect(shiftedFirstWhiteIndex(41, -1, 11), 40);
+    expect(shiftedFirstWhiteIndex(40, -1, 11), 33);
+  });
+
   test('clampFirstWhiteIndex keeps viewport inside A0..C8', () {
     expect(clampFirstWhiteIndex(-3, 11), 0);
     expect(clampFirstWhiteIndex(45, 11), 41);
