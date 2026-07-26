@@ -16,6 +16,21 @@ final List<int> whiteMidis = List.unmodifiable([
 int clampFirstWhiteIndex(int index, int whiteKeyCount) =>
     index.clamp(0, kWhiteKeyTotal - whiteKeyCount);
 
+/// One octave step that always rejoins the home grid (the default viewport's
+/// 7-white-key phase), so an end clamp never leaves later shifts misaligned.
+int shiftedFirstWhiteIndex(int current, int direction, int whiteKeyCount) {
+  const anchor = kDefaultFirstWhiteIndex % 7;
+  int target;
+  if (direction > 0) {
+    target = current + (anchor - current) % 7;
+    if (target <= current) target += 7;
+  } else {
+    target = current - (current - anchor) % 7;
+    if (target >= current) target -= 7;
+  }
+  return clampFirstWhiteIndex(target, whiteKeyCount);
+}
+
 class KeyGeometry {
   const KeyGeometry({required this.midi, required this.rect, required this.isBlack});
 
