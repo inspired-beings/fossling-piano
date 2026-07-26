@@ -23,29 +23,11 @@
   <g
      id="glyph"
      transform="translate(113,106) scale(6)">
-    <rect
-       id="keyboard-frame"
-       x="10"
-       y="13"
-       width="28"
-       height="22"
-       rx="2.5"
-       fill="none"
-       stroke="#ffffff"
-       stroke-width="3"
-       stroke-linecap="round"
-       stroke-miterlimit="2" />
-    <path
-       id="key-dividers"
-       d="M 17,14 V 34 M 24,14 V 34 M 31,14 V 34"
-       fill="none"
-       stroke="#ffffff"
-       stroke-width="2" />
-    <path
-       id="black-keys"
-       d="M 14.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z M 21.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z"
-       fill="#ffffff"
-       stroke="none" />
+    <rect id="c-key" x="11" y="8" width="8" height="32" ry="1" fill="#ffffff" />
+    <rect id="d-key" x="20" y="8" width="8" height="32" ry="1" fill="#ffffff" />
+    <rect id="e-key" x="29" y="8" width="8" height="32" ry="1" fill="#ffffff" />
+    <rect id="c-sharp-key" x="17" y="8" width="5" height="20" fill="#000000" />
+    <rect id="d-sharp-key" x="26" y="8" width="5" height="20" fill="#000000" />
   </g>
   <text
      id="wordmark-collection"

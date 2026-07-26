@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Single-color variant: the themed-icon tint flattens colors, so the
+         black keys are cut out of the white ones instead of drawn on top. -->
+    <group
+        android:scaleX="1.375"
+        android:scaleY="1.375"
+        android:translateX="21"
+        android:translateY="21">
+        <path
+            android:pathData="M 11,8 h 6 v 20 h 2 v 12 h -8 z"
+            android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M 22,8 h 4 v 20 h 2 v 12 h -8 v -12 h 2 z"
+            android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M 31,8 h 6 v 32 h -8 v -12 h 2 z"
+            android:fillColor="#FFFFFF" />
+    </group>
+</vector>

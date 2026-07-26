@@ -4,22 +4,26 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Maps the SVG's 48-unit canvas onto the 66dp safe zone. -->
+    <!-- Maps the SVG master's 48-unit canvas onto the 66dp safe zone. -->
     <group
         android:scaleX="1.375"
         android:scaleY="1.375"
         android:translateX="21"
         android:translateY="21">
         <path
-            android:pathData="M 12.5,13 h 23 a 2.5,2.5 0 0 1 2.5,2.5 v 17 a 2.5,2.5 0 0 1 -2.5,2.5 h -23 a 2.5,2.5 0 0 1 -2.5,-2.5 v -17 a 2.5,2.5 0 0 1 2.5,-2.5 z"
-            android:strokeColor="#FFFFFF"
-            android:strokeWidth="3" />
-        <path
-            android:pathData="M 17,14 L 17,34 M 24,14 L 24,34 M 31,14 L 31,34"
-            android:strokeColor="#FFFFFF"
-            android:strokeWidth="2" />
-        <path
-            android:pathData="M 14.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z M 21.75,14 h 4.5 v 7.5 a 1,1 0 0 1 -1,1 h -2.5 a 1,1 0 0 1 -1,-1 z"
+            android:pathData="M 12,8 h 6 a 1,1 0 0 1 1,1 v 30 a 1,1 0 0 1 -1,1 h -6 a 1,1 0 0 1 -1,-1 v -30 a 1,1 0 0 1 1,-1 z"
             android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M 21,8 h 6 a 1,1 0 0 1 1,1 v 30 a 1,1 0 0 1 -1,1 h -6 a 1,1 0 0 1 -1,-1 v -30 a 1,1 0 0 1 1,-1 z"
+            android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M 30,8 h 6 a 1,1 0 0 1 1,1 v 30 a 1,1 0 0 1 -1,1 h -6 a 1,1 0 0 1 -1,-1 v -30 a 1,1 0 0 1 1,-1 z"
+            android:fillColor="#FFFFFF" />
+        <path
+            android:pathData="M 17,8 h 5 v 20 h -5 z"
+            android:fillColor="#000000" />
+        <path
+            android:pathData="M 26,8 h 5 v 20 h -5 z"
+            android:fillColor="#000000" />
     </group>
 </vector>
