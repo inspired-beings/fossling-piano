@@ -42,7 +42,7 @@ void main() {
 
       expect(find.bySemanticsLabel('Octave down'), findsOneWidget);
       expect(find.bySemanticsLabel('Octave up'), findsOneWidget);
-      expect(find.text('Labels'), findsOneWidget);
+      expect(find.text('Note names'), findsOneWidget);
       expect(find.text('Sustain'), findsOneWidget);
       expect(find.text('Large keys'), findsOneWidget);
       expect(find.bySemanticsLabel('C 4, piano key'), findsOneWidget);

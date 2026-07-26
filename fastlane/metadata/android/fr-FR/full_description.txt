@@ -1,22 +1,27 @@
-<Phrase d'accroche.> Fossling <Fonction> <ce que fait l'app — un paragraphe, public principal nommé>.
+Jouez librement, sans rien partager. Fossling Piano transforme votre téléphone en un clavier de piano réactif au son d'un vrai piano à queue — pour essayer un accord, vérifier une note ou simplement jouer, et conçu pour que les personnes aveugles ou malvoyantes ne soient pas laissées de côté.
 
-<EMOJI> <PHRASE BÉNÉFICE EN CAPITALES>
-<1–3 phrases orientées bénéfices, tissant des fonctionnalités concrètes.>
+🎹 TOUT LE CLAVIER
+Les 88 touches sont là. Les boutons d'octave vous déplacent sur toute l'étendue, du la0 au do8, et l'affichage s'adapte à la largeur de votre écran pour que chaque touche reste assez grande.
 
-<EMOJI> <PHRASE BÉNÉFICE EN CAPITALES>
-<1–3 phrases.>
+🎵 LE SON D'UN VRAI PIANO
+Chaque note provient d'un enregistrement de piano à queue, pas d'un bip de synthétiseur. Activez la résonance pour laisser les notes sonner, désactivez-la pour un relâché net.
 
-<EMOJI> <PHRASE BÉNÉFICE EN CAPITALES>
-<1–3 phrases.>
+🎶 ACCORDS ET GLISSANDOS
+Appuyez sur plusieurs touches à la fois pour jouer un accord, ou faites glisser un doigt sur le clavier pour un glissando. Chaque doigt est suivi séparément.
 
-🔒 PRIVÉE PAR CONCEPTION
-Aucune publicité, aucun pistage, aucune mesure d'audience — jamais. <Vérité réseau pour cette app : soit « Aucun accès réseau. », soit la transparence complète — ce qui transite, où cela va, et l'option auto-hébergeable/auto-gérable.>
+♿ L'ACCESSIBILITÉ D'ABORD, TOUJOURS
+Chaque touche est annoncée par TalkBack et se joue par double appui. Une vibration confirme chaque pression, avec une pulsation distincte sur les do pour vous repérer. Mode grandes touches, contrastes élevés et respect de votre taille de police système.
+
+🔒 PRIVÉ PAR CONCEPTION
+Aucun accès réseau, aucune autorisation, aucune publicité, aucune mesure d'audience. Rien n'est enregistré et rien ne quitte votre téléphone.
 
 🌍 DANS VOTRE LANGUE
-Disponible en français et en anglais.
+Affichez le nom des notes sur les touches — do ré mi en français, C D E en anglais — ou masquez-les quand vous préférez simplement jouer. L'application est disponible en français et en anglais.
 
-Fossling <Fonction> est un logiciel libre (AGPL-3.0), membre de Fossling — la collection d'applications libres et sans publicité d'Inspired Beings.
+Le son du piano provient du jeu d'échantillons Salamander Grand Piano d'Alexander Holm (https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html), utilisé sous licence Creative Commons Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/). Les échantillons ont été raccourcis, dotés d'un fondu de sortie et compressés en Ogg Vorbis pour cette application.
+
+Fossling Piano est un logiciel libre (AGPL-3.0), membre de Fossling — la collection d'applications libres et sans publicité d'Inspired Beings.
 
 Plus d'applications Fossling : https://github.com/inspired-beings
 Site web : https://www.inspired-beings.com
-Code source : https://github.com/inspired-beings/fossling-<app>
+Code source : https://github.com/inspired-beings/fossling-piano
