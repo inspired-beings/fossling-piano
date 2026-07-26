@@ -76,10 +76,10 @@ class _PianoScreenState extends State<PianoScreen> {
     await widget.engine.release(voice, sustain: _sustainOn);
   }
 
-  void _shiftOctave(int deltaWhites, int whiteKeyCount) {
+  void _shiftOctave(int direction, int whiteKeyCount) {
     setState(() {
       _firstWhiteIndex =
-          clampFirstWhiteIndex(_firstWhiteIndex + deltaWhites, whiteKeyCount);
+          shiftedFirstWhiteIndex(_firstWhiteIndex, direction, whiteKeyCount);
     });
   }
 
@@ -94,8 +94,8 @@ class _PianoScreenState extends State<PianoScreen> {
               ControlBar(
                 canGoOctaveDown: _firstWhiteIndex > 0,
                 canGoOctaveUp: _firstWhiteIndex < kWhiteKeyTotal - whiteKeyCount,
-                onOctaveDown: () => _shiftOctave(-7, whiteKeyCount),
-                onOctaveUp: () => _shiftOctave(7, whiteKeyCount),
+                onOctaveDown: () => _shiftOctave(-1, whiteKeyCount),
+                onOctaveUp: () => _shiftOctave(1, whiteKeyCount),
                 labelsOn: _labelsOn,
                 onLabelsToggle: () => setState(() => _labelsOn = !_labelsOn),
                 sustainOn: _sustainOn,
