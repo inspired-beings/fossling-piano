@@ -5,7 +5,8 @@
   "octaveNext": "Octave up",
   "toggleNoteLabels": "Note names",
   "toggleSustain": "Sustain",
-  "toggleLargeKeys": "Large keys",
+  "keysBigger": "Bigger keys",
+  "keysSmaller": "Smaller keys",
   "keySemantics": "{note} {octave}, piano key",
   "@keySemantics": {
     "placeholders": {

@@ -27,9 +27,16 @@ final _screenStates = <String, Future<void> Function(WidgetTester, Locale)>{
     await tester.tap(find.byIcon(Icons.abc));
     await tester.pumpAndSettle();
   },
-  'piano (large keys)': (tester, locale) async {
+  'piano (bigger keys)': (tester, locale) async {
     await _pumpPianoScreen(tester, locale);
+    await tester.ensureVisible(find.byIcon(Icons.zoom_in));
     await tester.tap(find.byIcon(Icons.zoom_in));
+    await tester.pumpAndSettle();
+  },
+  'piano (smaller keys)': (tester, locale) async {
+    await _pumpPianoScreen(tester, locale);
+    await tester.ensureVisible(find.byIcon(Icons.zoom_out));
+    await tester.tap(find.byIcon(Icons.zoom_out));
     await tester.pumpAndSettle();
   },
   'piano (sustain on)': (tester, locale) async {

@@ -96,16 +96,44 @@ void main() {
     await pumpScreen(tester);
     await tester.tap(find.bySemanticsLabel('Octave down'));
     await tester.pump();
-    expect(tester.takeAnnouncements().single.message, 'Keys F2 to B3');
+    expect(tester.takeAnnouncements().single.message, 'Keys C3 to F4');
   });
 
-  testWidgets('large-key mode shows 7 white keys', (tester) async {
+  testWidgets('bigger keys shows 7 white keys, smaller shows 15', (tester) async {
     await pumpScreen(tester);
-    await tester.tap(find.text('Large keys'));
+    await tester.ensureVisible(find.text('Bigger keys'));
+    await tester.tap(find.text('Bigger keys'));
     await tester.pump();
     // Labels on by default: count white-key label texts.
     final labels = find.textContaining(RegExp(r'^[A-G]\d$'));
     expect(labels, findsNWidgets(7));
+    await tester.ensureVisible(find.text('Smaller keys'));
+    await tester.tap(find.text('Smaller keys'));
+    await tester.pump();
+    await tester.ensureVisible(find.text('Smaller keys'));
+    await tester.tap(find.text('Smaller keys'));
+    await tester.pump();
+    expect(labels, findsNWidgets(15));
+    expect(find.text('C4'), findsOneWidget);
+    expect(find.text('C6'), findsOneWidget); // two full octaves, C to C
+  });
+
+  testWidgets('size change at the right clamp keeps C8 in view', (tester) async {
+    await pumpScreen(tester);
+    final up = find.bySemanticsLabel('Octave up');
+    for (var i = 0; i < 3; i++) {
+      await tester.tap(up);
+      await tester.pump();
+    }
+    expect(find.text('C8'), findsOneWidget); // right-clamped
+    await tester.ensureVisible(find.text('Bigger keys'));
+    await tester.tap(find.text('Bigger keys'));
+    await tester.pump();
+    expect(find.text('C8'), findsOneWidget); // still right-anchored
+    await tester.ensureVisible(find.text('Smaller keys'));
+    await tester.tap(find.text('Smaller keys'));
+    await tester.pump();
+    expect(find.text('C8'), findsOneWidget);
   });
 
   testWidgets('TalkBack tap activation plays and releases', (tester) async {

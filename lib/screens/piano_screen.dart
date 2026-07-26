@@ -35,13 +35,26 @@ class _PianoScreenState extends State<PianoScreen> {
   int _firstWhiteIndex = kDefaultFirstWhiteIndex;
   bool _labelsOn = true;
   bool _sustainOn = false;
-  bool _largeKeysOn = false;
+  int _sizeStep = kDefaultSizeStep;
 
   /// Caps the viewport so every white key keeps a ≥48dp target on any width.
   int _whiteKeyCountFor(double width) {
     final maxKeys = math.max(3, width ~/ 48);
-    final wanted = _largeKeysOn ? kLargeWhiteKeyCount : kNormalWhiteKeyCount;
-    return math.min(wanted, maxKeys);
+    return math.min(kWhiteKeyCountSteps[_sizeStep], maxKeys);
+  }
+
+  void _changeKeySize(int delta, double width) {
+    setState(() {
+      final oldCount = _whiteKeyCountFor(width);
+      final wasRightClamped = _firstWhiteIndex >= kWhiteKeyTotal - oldCount;
+      _sizeStep = (_sizeStep + delta).clamp(0, kWhiteKeyCountSteps.length - 1);
+      final newCount = _whiteKeyCountFor(width);
+      // Keep the right end in view when zooming at the right clamp; everywhere
+      // else the leftmost key stays the anchor.
+      _firstWhiteIndex = wasRightClamped
+          ? kWhiteKeyTotal - newCount
+          : clampFirstWhiteIndex(_firstWhiteIndex, newCount);
+    });
   }
 
   Future<void> _startNote(int pointerId, int midi) async {
@@ -113,10 +126,12 @@ class _PianoScreenState extends State<PianoScreen> {
                 onLabelsToggle: () => setState(() => _labelsOn = !_labelsOn),
                 sustainOn: _sustainOn,
                 onSustainToggle: () => setState(() => _sustainOn = !_sustainOn),
-                largeKeysOn: _largeKeysOn,
-                onLargeKeysToggle: () => setState(() {
-                  _largeKeysOn = !_largeKeysOn;
-                }),
+                onBiggerKeys: _sizeStep < kWhiteKeyCountSteps.length - 1
+                    ? () => _changeKeySize(1, constraints.maxWidth)
+                    : null,
+                onSmallerKeys: _sizeStep > 0
+                    ? () => _changeKeySize(-1, constraints.maxWidth)
+                    : null,
               ),
               Expanded(
                 child: PianoKeyboard(

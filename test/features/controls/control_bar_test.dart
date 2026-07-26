@@ -10,7 +10,8 @@ void main() {
     bool canGoOctaveUp = true,
     VoidCallback? onLabelsToggle,
     VoidCallback? onSustainToggle,
-    VoidCallback? onLargeKeysToggle,
+    VoidCallback? onBiggerKeys,
+    VoidCallback? onSmallerKeys,
     bool sustainOn = false,
   }) =>
       ControlBar(
@@ -22,8 +23,8 @@ void main() {
         onLabelsToggle: onLabelsToggle ?? () {},
         sustainOn: sustainOn,
         onSustainToggle: onSustainToggle ?? () {},
-        largeKeysOn: false,
-        onLargeKeysToggle: onLargeKeysToggle ?? () {},
+        onBiggerKeys: onBiggerKeys ?? () {},
+        onSmallerKeys: onSmallerKeys ?? () {},
       );
 
   testWidgets('all controls carry localized semantics labels (fr)', (tester) async {
@@ -32,7 +33,8 @@ void main() {
     expect(find.bySemanticsLabel('Octave supérieure'), findsOneWidget);
     expect(find.text('Noms des notes'), findsOneWidget);
     expect(find.text('Résonance'), findsOneWidget);
-    expect(find.text('Grandes touches'), findsOneWidget);
+    expect(find.text('Touches plus grandes'), findsOneWidget);
+    expect(find.text('Touches plus petites'), findsOneWidget);
   });
 
   testWidgets('octave buttons disable at the range ends', (tester) async {
@@ -46,19 +48,23 @@ void main() {
     }
   });
 
-  testWidgets('toggles fire their callbacks', (tester) async {
-    var labels = 0, sustain = 0, large = 0;
+  testWidgets('toggles and size buttons fire their callbacks', (tester) async {
+    var labels = 0, sustain = 0, bigger = 0, smaller = 0;
     await pumpLocalized(
       tester,
       bar(
         onLabelsToggle: () => labels++,
         onSustainToggle: () => sustain++,
-        onLargeKeysToggle: () => large++,
+        onBiggerKeys: () => bigger++,
+        onSmallerKeys: () => smaller++,
       ),
     );
     await tester.tap(find.text('Note names'));
     await tester.tap(find.text('Sustain'));
-    await tester.tap(find.text('Large keys'));
-    expect((labels, sustain, large), (1, 1, 1));
+    await tester.ensureVisible(find.text('Bigger keys'));
+    await tester.tap(find.text('Bigger keys'));
+    await tester.ensureVisible(find.text('Smaller keys'));
+    await tester.tap(find.text('Smaller keys'));
+    expect((labels, sustain, bigger, smaller), (1, 1, 1, 1));
   });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../l10n/generated/app_localizations.dart';
+import 'control_action_button.dart';
 import 'control_toggle_button.dart';
 import 'octave_button.dart';
 
@@ -15,8 +16,8 @@ class ControlBar extends StatelessWidget {
     required this.onLabelsToggle,
     required this.sustainOn,
     required this.onSustainToggle,
-    required this.largeKeysOn,
-    required this.onLargeKeysToggle,
+    required this.onBiggerKeys,
+    required this.onSmallerKeys,
   });
 
   final bool canGoOctaveDown;
@@ -27,8 +28,8 @@ class ControlBar extends StatelessWidget {
   final VoidCallback onLabelsToggle;
   final bool sustainOn;
   final VoidCallback onSustainToggle;
-  final bool largeKeysOn;
-  final VoidCallback onLargeKeysToggle;
+  final VoidCallback? onBiggerKeys;
+  final VoidCallback? onSmallerKeys;
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +62,15 @@ class ControlBar extends StatelessWidget {
             selected: sustainOn,
             onPressed: onSustainToggle,
           ),
-          ControlToggleButton(
+          ControlActionButton(
             icon: Icons.zoom_in,
-            label: l10n.toggleLargeKeys,
-            selected: largeKeysOn,
-            onPressed: onLargeKeysToggle,
+            label: l10n.keysBigger,
+            onPressed: onBiggerKeys,
+          ),
+          ControlActionButton(
+            icon: Icons.zoom_out,
+            label: l10n.keysSmaller,
+            onPressed: onSmallerKeys,
           ),
         ],
       ),
