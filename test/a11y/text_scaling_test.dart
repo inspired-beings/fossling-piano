@@ -6,6 +6,7 @@ import 'package:piano/screens/piano_screen.dart';
 
 import '../helpers/fake_audio_engine.dart';
 import '../helpers/fake_key_haptics.dart';
+import '../helpers/fake_settings_store.dart';
 import '../helpers/pump_localized.dart';
 
 /// Android's font-size setting goes to 2.0x — the UI must survive it on the
@@ -36,7 +37,10 @@ void main() {
 
       await pumpLocalized(
         tester,
-        PianoScreen(engine: FakeAudioEngine(), haptics: FakeKeyHaptics()),
+        PianoScreen(
+            engine: FakeAudioEngine(),
+            haptics: FakeKeyHaptics(),
+            settingsStore: FakeSettingsStore()),
         textScaler: TextScaler.linear(scale),
       );
 
