@@ -57,7 +57,7 @@ void main() {
     expect(layout.hitTest(const Offset(50, 401)), isNull);
   });
 
-  test('black keys never drop below the 48dp target floor', () {
+  test('black keys never drop below the 48dp target floor (normal size)', () {
     final layout = KeyboardLayout(
       firstWhiteIndex: 19,
       whiteKeyCount: 11,
@@ -65,6 +65,17 @@ void main() {
     );
     for (final key in layout.blackKeys) {
       expect(key.rect.width, greaterThanOrEqualTo(48.0));
+    }
+  });
+
+  test('small-key layout keeps blacks proportional (user-opt-in density)', () {
+    final layout = KeyboardLayout(
+      firstWhiteIndex: 2,
+      whiteKeyCount: 15,
+      size: const Size(800, 400), // whiteWidth 53.3
+    );
+    for (final key in layout.blackKeys) {
+      expect(key.rect.width, closeTo(800 / 15 * 0.6, 0.001));
     }
   });
 

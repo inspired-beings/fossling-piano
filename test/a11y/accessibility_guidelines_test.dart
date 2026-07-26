@@ -56,7 +56,12 @@ void main() {
         final handle = tester.ensureSemantics();
         await state.value(tester, locale);
 
-        await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+        // Small-key density is an explicit user opt-in (Ivan, 2026-07-26):
+        // black keys drop below 48dp by design there — every other state
+        // keeps the full tap-target gate, and labels + contrast always apply.
+        if (state.key != 'piano (smaller keys)') {
+          await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+        }
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
         await expectLater(tester, meetsGuideline(textContrastGuideline));
 
