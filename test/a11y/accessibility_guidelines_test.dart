@@ -6,12 +6,16 @@ import 'package:piano/screens/piano_screen.dart';
 
 import '../helpers/fake_audio_engine.dart';
 import '../helpers/fake_key_haptics.dart';
+import '../helpers/fake_settings_store.dart';
 import '../helpers/pump_localized.dart';
 
 Future<void> _pumpPianoScreen(WidgetTester tester, Locale locale) =>
     pumpLocalized(
       tester,
-      PianoScreen(engine: FakeAudioEngine(), haptics: FakeKeyHaptics()),
+      PianoScreen(
+          engine: FakeAudioEngine(),
+          haptics: FakeKeyHaptics(),
+          settingsStore: FakeSettingsStore()),
       locale: locale,
     );
 

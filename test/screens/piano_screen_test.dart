@@ -2,23 +2,29 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:piano/libs/settings/piano_settings.dart';
 import 'package:piano/screens/piano_screen.dart';
 
 import '../helpers/fake_audio_engine.dart';
 import '../helpers/fake_key_haptics.dart';
+import '../helpers/fake_settings_store.dart';
 import '../helpers/pump_localized.dart';
 
 void main() {
   late FakeAudioEngine engine;
   late FakeKeyHaptics haptics;
+  late FakeSettingsStore store;
 
   setUp(() {
     engine = FakeAudioEngine();
     haptics = FakeKeyHaptics();
+    store = FakeSettingsStore();
   });
 
   Future<void> pumpScreen(WidgetTester tester, {Locale locale = const Locale('en')}) =>
-      pumpLocalized(tester, PianoScreen(engine: engine, haptics: haptics),
+      pumpLocalized(
+          tester,
+          PianoScreen(engine: engine, haptics: haptics, settingsStore: store),
           locale: locale);
 
   Offset keyCenter(WidgetTester tester, String semanticsLabel) =>
@@ -134,6 +140,47 @@ void main() {
     await tester.tap(find.text('Smaller keys'));
     await tester.pump();
     expect(find.text('C8'), findsOneWidget);
+  });
+
+  testWidgets('restores persisted state on start', (tester) async {
+    store = FakeSettingsStore(const PianoSettings(
+      firstWhiteIndex: 9, // C2
+      labelsOn: false,
+      sustainOn: true,
+      sizeStep: 2, // bigger keys: 7 whites
+    ));
+    await pumpLocalized(
+      tester,
+      PianoScreen(
+        engine: engine,
+        haptics: haptics,
+        settingsStore: store,
+        initialSettings: store.stored,
+      ),
+    );
+    expect(find.bySemanticsLabel('C 2, piano key'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^[A-G]\d$')), findsNothing); // labels off
+    final gesture =
+        await tester.startGesture(keyCenter(tester, 'C 2, piano key'));
+    await tester.pump();
+    await gesture.up();
+    await tester.pump();
+    expect(engine.released.single.sustain, isTrue); // sustain restored
+  });
+
+  testWidgets('changes are persisted through the store', (tester) async {
+    await pumpScreen(tester);
+    await tester.tap(find.text('Sustain'));
+    await tester.pump();
+    expect(store.saveCount, 1);
+    expect(store.stored.sustainOn, isTrue);
+    await tester.tap(find.bySemanticsLabel('Octave down'));
+    await tester.pump();
+    expect(store.stored.firstWhiteIndex, 16); // C3
+    await tester.ensureVisible(find.text('Bigger keys'));
+    await tester.tap(find.text('Bigger keys'));
+    await tester.pump();
+    expect(store.stored.sizeStep, 2);
   });
 
   testWidgets('TalkBack tap activation plays and releases', (tester) async {

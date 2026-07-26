@@ -14,12 +14,22 @@ import '../features/keyboard/pointer_tracker.dart';
 import '../features/keyboard/types.dart';
 import '../libs/audio/audio_engine.dart';
 import '../libs/note_mapper.dart';
+import '../libs/settings/piano_settings.dart';
+import '../libs/settings/settings_store.dart';
 
 class PianoScreen extends StatefulWidget {
-  const PianoScreen({super.key, required this.engine, required this.haptics});
+  const PianoScreen({
+    super.key,
+    required this.engine,
+    required this.haptics,
+    required this.settingsStore,
+    this.initialSettings = const PianoSettings(),
+  });
 
   final AudioEngine engine;
   final KeyHaptics haptics;
+  final SettingsStore settingsStore;
+  final PianoSettings initialSettings;
 
   @override
   State<PianoScreen> createState() => _PianoScreenState();
@@ -32,10 +42,20 @@ class _PianoScreenState extends State<PianoScreen> {
   final PointerTracker _tracker = PointerTracker();
   final Map<int, AudioVoice> _pointerVoices = {};
 
-  int _firstWhiteIndex = kDefaultFirstWhiteIndex;
-  bool _labelsOn = true;
-  bool _sustainOn = false;
-  int _sizeStep = kDefaultSizeStep;
+  late int _firstWhiteIndex = widget.initialSettings.sanitized().firstWhiteIndex;
+  late bool _labelsOn = widget.initialSettings.labelsOn;
+  late bool _sustainOn = widget.initialSettings.sustainOn;
+  late int _sizeStep = widget.initialSettings.sanitized().sizeStep;
+
+  void _persist() {
+    // Fire-and-forget: persistence must never block or fail playing.
+    widget.settingsStore.save(PianoSettings(
+      firstWhiteIndex: _firstWhiteIndex,
+      labelsOn: _labelsOn,
+      sustainOn: _sustainOn,
+      sizeStep: _sizeStep,
+    ));
+  }
 
   /// Caps the viewport so every white key keeps a ≥48dp target on any width.
   int _whiteKeyCountFor(double width) {
@@ -55,6 +75,7 @@ class _PianoScreenState extends State<PianoScreen> {
           ? kWhiteKeyTotal - newCount
           : clampFirstWhiteIndex(_firstWhiteIndex, newCount);
     });
+    _persist();
   }
 
   Future<void> _startNote(int pointerId, int midi) async {
@@ -97,6 +118,7 @@ class _PianoScreenState extends State<PianoScreen> {
       _firstWhiteIndex =
           shiftedFirstWhiteIndex(_firstWhiteIndex, direction, whiteKeyCount);
     });
+    _persist();
     // Octave moves are silent, so TalkBack users need the new range spoken.
     final l10n = AppLocalizations.of(context);
     SemanticsService.sendAnnouncement(
@@ -123,9 +145,15 @@ class _PianoScreenState extends State<PianoScreen> {
                 onOctaveDown: () => _shiftOctave(-1, whiteKeyCount),
                 onOctaveUp: () => _shiftOctave(1, whiteKeyCount),
                 labelsOn: _labelsOn,
-                onLabelsToggle: () => setState(() => _labelsOn = !_labelsOn),
+                onLabelsToggle: () {
+                  setState(() => _labelsOn = !_labelsOn);
+                  _persist();
+                },
                 sustainOn: _sustainOn,
-                onSustainToggle: () => setState(() => _sustainOn = !_sustainOn),
+                onSustainToggle: () {
+                  setState(() => _sustainOn = !_sustainOn);
+                  _persist();
+                },
                 onBiggerKeys: _sizeStep < kWhiteKeyCountSteps.length - 1
                     ? () => _changeKeySize(1, constraints.maxWidth)
                     : null,
