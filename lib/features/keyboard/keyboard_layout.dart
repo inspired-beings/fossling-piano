@@ -57,7 +57,12 @@ class KeyboardLayout {
         ),
     ]);
     // A11y floor: ≥48dp targets, but a black key never outgrows a white one.
-    final blackWidth = math.max(whiteWidth * 0.6, math.min(48.0, whiteWidth));
+    // The floor is waived in the dense small-key layout (an explicit user
+    // opt-in, Ivan 2026-07-26): flooring there makes blacks nearly as wide as
+    // whites and steals their neighbors' upper strip, causing wrong notes.
+    final blackWidth = whiteKeyCount > kWhiteKeyCountSteps[kDefaultSizeStep]
+        ? whiteWidth * 0.6
+        : math.max(whiteWidth * 0.6, math.min(48.0, whiteWidth));
     final blackHeight = size.height * 0.62;
     blackKeys = List.unmodifiable([
       for (var i = -1; i < whiteKeyCount; i++)

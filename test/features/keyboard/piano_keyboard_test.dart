@@ -9,7 +9,7 @@ void main() {
   Widget keyboard({bool showLabels = true, void Function(int, int?)? onDown}) =>
       PianoKeyboard(
         firstWhiteIndex: kDefaultFirstWhiteIndex,
-        whiteKeyCount: kNormalWhiteKeyCount,
+        whiteKeyCount: kWhiteKeyCountSteps[kDefaultSizeStep],
         showLabels: showLabels,
         pressedMidis: const {},
         onKeyDown: onDown ?? (_, _) {},
@@ -32,7 +32,7 @@ void main() {
   testWidgets('every key exposes semantics with spoken note name', (tester) async {
     await pumpLocalized(tester, keyboard());
     expect(find.bySemanticsLabel('C 4, piano key'), findsOneWidget);
-    expect(find.bySemanticsLabel('F sharp 3, piano key'), findsOneWidget);
+    expect(find.bySemanticsLabel('C sharp 4, piano key'), findsOneWidget);
   });
 
   testWidgets('pointer down reaches onKeyDown with the hit midi', (tester) async {

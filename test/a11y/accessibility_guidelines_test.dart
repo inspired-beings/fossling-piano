@@ -27,9 +27,16 @@ final _screenStates = <String, Future<void> Function(WidgetTester, Locale)>{
     await tester.tap(find.byIcon(Icons.abc));
     await tester.pumpAndSettle();
   },
-  'piano (large keys)': (tester, locale) async {
+  'piano (bigger keys)': (tester, locale) async {
     await _pumpPianoScreen(tester, locale);
+    await tester.ensureVisible(find.byIcon(Icons.zoom_in));
     await tester.tap(find.byIcon(Icons.zoom_in));
+    await tester.pumpAndSettle();
+  },
+  'piano (smaller keys)': (tester, locale) async {
+    await _pumpPianoScreen(tester, locale);
+    await tester.ensureVisible(find.byIcon(Icons.zoom_out));
+    await tester.tap(find.byIcon(Icons.zoom_out));
     await tester.pumpAndSettle();
   },
   'piano (sustain on)': (tester, locale) async {
@@ -49,7 +56,12 @@ void main() {
         final handle = tester.ensureSemantics();
         await state.value(tester, locale);
 
-        await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+        // Small-key density is an explicit user opt-in (Ivan, 2026-07-26):
+        // black keys drop below 48dp by design there — every other state
+        // keeps the full tap-target gate, and labels + contrast always apply.
+        if (state.key != 'piano (smaller keys)') {
+          await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+        }
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
         await expectLater(tester, meetsGuideline(textContrastGuideline));
 

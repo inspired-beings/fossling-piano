@@ -8,20 +8,21 @@ void main() {
     expect(whiteMidis, hasLength(kWhiteKeyTotal));
     expect(whiteMidis.first, 21);
     expect(whiteMidis.last, 108);
-    expect(whiteMidis[kDefaultFirstWhiteIndex], 53); // F3
+    expect(whiteMidis[kDefaultFirstWhiteIndex], 60); // C4
   });
 
-  test('normal viewport from F3 shows F3..B4, no black at either edge', () {
+  test('default viewport starts on middle C and shows C4..F5', () {
     final layout = KeyboardLayout(
       firstWhiteIndex: kDefaultFirstWhiteIndex,
-      whiteKeyCount: kNormalWhiteKeyCount,
+      whiteKeyCount: 11,
       size: const Size(1100, 400),
     );
     expect(layout.whiteKeys, hasLength(11));
-    expect(layout.whiteKeys.first.midi, 53); // F3
-    expect(layout.whiteKeys.last.midi, 71); // B4
-    // Interior blacks: F#3 G#3 A#3 C#4 D#4 F#4 G#4 A#4; E3|F3 and B4|C5 gaps have none.
+    expect(layout.whiteKeys.first.midi, 60); // C4
+    expect(layout.whiteKeys.last.midi, 77); // F5
+    // 7 interior blacks + the clipped F#5 at the right edge; B3|C4 has none.
     expect(layout.blackKeys, hasLength(8));
+    expect(layout.blackKeys.map((k) => k.midi), contains(78)); // F#5
   });
 
   test('viewport starting at A0 includes clipped right-edge black', () {
@@ -46,17 +47,17 @@ void main() {
 
   test('hitTest prefers black keys and returns null outside', () {
     final layout = KeyboardLayout(
-      firstWhiteIndex: 19,
+      firstWhiteIndex: kDefaultFirstWhiteIndex,
       whiteKeyCount: 11,
       size: const Size(1100, 400),
     );
-    expect(layout.hitTest(const Offset(100, 50)), 54); // F#3 straddles F3|G3
-    expect(layout.hitTest(const Offset(100, 390)), anyOf(53, 55)); // below blacks
+    expect(layout.hitTest(const Offset(100, 50)), 61); // C#4 straddles C4|D4
+    expect(layout.hitTest(const Offset(100, 390)), anyOf(60, 62)); // below blacks
     expect(layout.hitTest(const Offset(-1, 50)), isNull);
     expect(layout.hitTest(const Offset(50, 401)), isNull);
   });
 
-  test('black keys never drop below the 48dp target floor', () {
+  test('black keys never drop below the 48dp target floor (normal size)', () {
     final layout = KeyboardLayout(
       firstWhiteIndex: 19,
       whiteKeyCount: 11,
@@ -67,18 +68,29 @@ void main() {
     }
   });
 
-  test('octave shifts snap back to the home grid after an end clamp', () {
-    // Down from the default F3 view: F2, F1, then clamped to A0.
-    expect(shiftedFirstWhiteIndex(19, -1, 11), 12);
-    expect(shiftedFirstWhiteIndex(12, -1, 11), 5);
-    expect(shiftedFirstWhiteIndex(5, -1, 11), 0);
-    // Back up: rejoins the F-anchored grid instead of staying A-anchored.
-    expect(shiftedFirstWhiteIndex(0, 1, 11), 5);
-    expect(shiftedFirstWhiteIndex(5, 1, 11), 12);
-    // Top end: 40 is on-grid, 41 is the clamp for an 11-key viewport.
-    expect(shiftedFirstWhiteIndex(40, 1, 11), 41);
-    expect(shiftedFirstWhiteIndex(41, -1, 11), 40);
-    expect(shiftedFirstWhiteIndex(40, -1, 11), 33);
+  test('small-key layout keeps blacks proportional (user-opt-in density)', () {
+    final layout = KeyboardLayout(
+      firstWhiteIndex: 2,
+      whiteKeyCount: 15,
+      size: const Size(800, 400), // whiteWidth 53.3
+    );
+    for (final key in layout.blackKeys) {
+      expect(key.rect.width, closeTo(800 / 15 * 0.6, 0.001));
+    }
+  });
+
+  test('octave shifts snap back to the C-anchored home grid after a clamp', () {
+    // Down from the default C4 view: C3, C2, C1, then clamped to A0.
+    expect(shiftedFirstWhiteIndex(23, -1, 11), 16);
+    expect(shiftedFirstWhiteIndex(16, -1, 11), 9);
+    expect(shiftedFirstWhiteIndex(9, -1, 11), 2);
+    expect(shiftedFirstWhiteIndex(2, -1, 11), 0);
+    // Back up: rejoins the C grid instead of staying A-anchored.
+    expect(shiftedFirstWhiteIndex(0, 1, 11), 2);
+    expect(shiftedFirstWhiteIndex(2, 1, 11), 9);
+    // Top end: C7 (37) → clamp 41, and back down rejoins the C grid.
+    expect(shiftedFirstWhiteIndex(37, 1, 11), 41);
+    expect(shiftedFirstWhiteIndex(41, -1, 11), 37);
   });
 
   test('clampFirstWhiteIndex keeps viewport inside A0..C8', () {
